@@ -6,3 +6,4 @@ This is my first game made with Godot. It's a simple pong clone. Just getting to
 
 - [Godot Engine](https://godotengine.org/)
 - [Godot Docs](https://docs.godotengine.org/en/stable/index.html)
+- [YouTube Tutorial](https://www.youtube.com/watch?v=Xq9AyhX8HUc)

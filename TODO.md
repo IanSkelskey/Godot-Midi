@@ -1,0 +1,19 @@
+- [ ] Add sounds to the game
+  - [ ] Add sound effects for the ball hitting the paddles
+  - [ ] Add sound effects for the ball hitting the walls
+  - [ ] Add sound effects for the ball scoring
+  - [ ] Add background music
+  - [ ] Add sound effects for the game over screen
+  - [ ] Add sound effects for the game win screen
+  - [ ] Add sound effects for the game start
+  - [ ] Add sound effects for the game pause
+  - [ ] Add sound effects for the game resume
+- [ ] Add a main menu
+  - [ ] Add a title screen
+  - [ ] Add a play button
+  - [ ] Add a settings button
+  - [ ] Add a quit button
+- [ ] Add a settings menu
+    - [ ] Add a volume slider
+    - [ ] Add a fullscreen toggle
+    - [ ] Add a back button
