@@ -1,15 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://qjnojen68sf6"]
+[gd_scene load_steps=11 format=3 uid="uid://qjnojen68sf6"]
 
-[ext_resource type="PackedScene" uid="uid://el4qx885fwvu" path="res://paddle.tscn" id="1_huqje"]
 [ext_resource type="Script" path="res://pong.gd" id="1_n745h"]
-[ext_resource type="PackedScene" uid="uid://c02b4sn0v8xw1" path="res://ball.tscn" id="2_64fhw"]
+[ext_resource type="Script" path="res://ball.gd" id="2_l3xrr"]
 [ext_resource type="Script" path="res://player.gd" id="3_5bvsy"]
 [ext_resource type="PackedScene" uid="uid://brbowp5tywrak" path="res://boundaries.tscn" id="3_07gtc"]
-[ext_resource type="PackedScene" uid="uid://bdee84v8ne3jj" path="res://goals.tscn" id="4_uvwc5"]
-[ext_resource type="PackedScene" uid="uid://bmfo37yf6f4t4" path="res://hud.tscn" id="5_nd588"]
+[ext_resource type="Script" path="res://CPU.gd" id="4_i1mkf"]
+[ext_resource type="FontFile" uid="uid://c3tyarqgkltcb" path="res://assets/font.ttf" id="6_732r6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysg2j"]
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pogcg"]
 size = Vector2(24, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_333ub"]
+size = Vector2(64, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y235f"]
+size = Vector2(64, 648)
 
 [node name="Pong" type="Node2D"]
 script = ExtResource("1_n745h")
@@ -19,9 +27,18 @@ offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="Ball" parent="." instance=ExtResource("2_64fhw")]
+[node name="Ball" type="CharacterBody2D" parent="."]
 light_mask = 3
 position = Vector2(592, 312)
+script = ExtResource("2_l3xrr")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_ysg2j")
 
 [node name="Player" type="StaticBody2D" parent="."]
 position = Vector2(1104, 272)
@@ -35,12 +52,61 @@ offset_bottom = 96.0
 position = Vector2(12, 48)
 shape = SubResource("RectangleShape2D_pogcg")
 
-[node name="CPU" parent="." instance=ExtResource("1_huqje")]
+[node name="CPU" type="StaticBody2D" parent="."]
 position = Vector2(24, 272)
+script = ExtResource("4_i1mkf")
+
+[node name="ColorRect" type="ColorRect" parent="CPU"]
+offset_right = 24.0
+offset_bottom = 96.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU"]
+position = Vector2(12, 48)
+shape = SubResource("RectangleShape2D_pogcg")
 
 [node name="Boundaries" parent="." instance=ExtResource("3_07gtc")]
 
-[node name="Goals" parent="." instance=ExtResource("4_uvwc5")]
+[node name="LeftGoal" type="Area2D" parent="."]
+light_mask = 2
 visibility_layer = 2
 
-[node name="HUD" parent="." instance=ExtResource("5_nd588")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal"]
+position = Vector2(-32, 324)
+shape = SubResource("RectangleShape2D_333ub")
+
+[node name="RightGoal" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal"]
+position = Vector2(1184, 324)
+shape = SubResource("RectangleShape2D_y235f")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CPUScore" type="Label" parent="HUD"]
+offset_left = 64.0
+offset_top = 24.0
+offset_right = 208.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("6_732r6")
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="PlayerScore" type="Label" parent="HUD"]
+offset_left = 944.0
+offset_top = 24.0
+offset_right = 1088.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("6_732r6")
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 2
+
+[node name="BallTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="LeftGoal" to="." method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="RightGoal" to="." method="_on_right_goal_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
