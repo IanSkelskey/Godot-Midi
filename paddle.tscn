@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://el4qx885fwvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pogcg"]
+size = Vector2(24, 96)
+
+[node name="Paddle" type="StaticBody2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 24.0
+offset_bottom = 96.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 48)
+shape = SubResource("RectangleShape2D_pogcg")

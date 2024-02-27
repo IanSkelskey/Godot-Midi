@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://qjnojen68sf6"]
+
+[ext_resource type="PackedScene" uid="uid://el4qx885fwvu" path="res://paddle.tscn" id="1_huqje"]
+[ext_resource type="PackedScene" uid="uid://c02b4sn0v8xw1" path="res://ball.tscn" id="2_64fhw"]
+[ext_resource type="PackedScene" uid="uid://brbowp5tywrak" path="res://boundaries.tscn" id="3_07gtc"]
+[ext_resource type="PackedScene" uid="uid://bdee84v8ne3jj" path="res://goals.tscn" id="4_uvwc5"]
+[ext_resource type="PackedScene" uid="uid://bmfo37yf6f4t4" path="res://hud.tscn" id="5_nd588"]
+
+[node name="Pong" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="Ball" parent="." instance=ExtResource("2_64fhw")]
+light_mask = 3
+position = Vector2(592, 312)
+
+[node name="Player" parent="." instance=ExtResource("1_huqje")]
+position = Vector2(1104, 272)
+
+[node name="CPU" parent="." instance=ExtResource("1_huqje")]
+position = Vector2(24, 272)
+
+[node name="Boundaries" parent="." instance=ExtResource("3_07gtc")]
+
+[node name="Goals" parent="." instance=ExtResource("4_uvwc5")]
+visibility_layer = 2
+
+[node name="HUD" parent="." instance=ExtResource("5_nd588")]
