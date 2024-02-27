@@ -8,7 +8,7 @@
 
 [node name="Pong" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
