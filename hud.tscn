@@ -5,18 +5,18 @@
 [node name="HUD" type="CanvasLayer"]
 
 [node name="CPUScore" type="Label" parent="."]
-offset_left = 24.0
+offset_left = 64.0
 offset_top = 24.0
-offset_right = 168.0
+offset_right = 208.0
 offset_bottom = 84.0
 theme_override_fonts/font = ExtResource("1_vf00i")
 theme_override_font_sizes/font_size = 60
 text = "0"
 
 [node name="PlayerScore" type="Label" parent="."]
-offset_left = 984.0
+offset_left = 944.0
 offset_top = 24.0
-offset_right = 1128.0
+offset_right = 1088.0
 offset_bottom = 84.0
 theme_override_fonts/font = ExtResource("1_vf00i")
 theme_override_font_sizes/font_size = 60
